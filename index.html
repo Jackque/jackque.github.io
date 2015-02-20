@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Change</title>
+    <title>Jacky Han</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,41 +32,58 @@
 
 <body>
 
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top">Change</a>
-            </li>
-            <li>
-                <a href="#top">Home</a>
-            </li>
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#services">Services</a>
-            </li>
-            <li>
-                <a href="#portfolio">Portfolio</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
+     <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#top">Jacky Han</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#projects">My Projects</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#bottom">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
     </nav>
 
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1>Name</h1>
-            <h3><i>1B Software Engineer</i></h3>
-            <br>
+            <h1>Jacky Han</h1>
+            <h3>Software Developer/Enthusiast</h3>
+			<h3>Student Leader</h3>
+			<h3>Musician</h3>
+		    <br>
+			<br>
+			<h3><i>"Barriers exist to be broken."</i><h3>
+
+			<br>
             <a href="#about" class="btn btn-circle page-scroll">
 				<i class="fa fa-angle-double-down fa-5x"></i>
             </a>
+			
         </div>
     </header>
 
@@ -75,8 +92,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-                    <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
+					<h3>Hi! I'm Jacky, currently a 1B Software Engineer studying at the University of Waterloo.</h3>
+					<br>
+                    <h2>What I Do</h2>
+					<p class="lead">As a huge lover of both entertainment and engineering, I love programs that integrate many fields and interests together creating useful and fluid applications. Working on programs that appeal to a variety of audiences is something I strive for.</p>
+					<h2>What I Love</h2>
+					<p class="lead">I enjoy all types of entertainment, from Led Zepplin to Muse, and from Inception to Spongebob. My favorite games at the moment include Dark Souls, Civilization, League of Legends, and Dota (Yes I play both and somehow live through all the hate).</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -89,7 +110,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>My Links</h2>
+                    <h2>Links</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
@@ -115,7 +136,7 @@
                                     <strong>Resume</strong>
                                 </h4>
                                 <p>My current resume as of 1B Software engineering.</p>
-                                <a href="Resume.pdf" class="btn btn-light">View</a>
+                                <a href="Resume.pdf" target="_blank" class="btn btn-light">View</a>
                             </div>
                         </div>
                     </div>
@@ -129,9 +150,9 @@
     </section>
 
     <!-- Callout -->
-    <aside class="callout">
+    <aside id="projects" class="callout">
         <div class="text-vertical-center">
-            <h1>Projects</h1>
+            <h1>Side Projects</h1>
         </div>
     </aside>
 
@@ -140,7 +161,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
+                    <h2></h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-6">
@@ -173,7 +194,7 @@
                         </div>
                     </div>
                     <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
+                    <a href="http://github.com/Jackque/" target="_blank" class="btn btn-dark">View More On Github</a>
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -186,7 +207,7 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
+        <div id="bottom" class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h4><strong>Start Bootstrap</strong>
