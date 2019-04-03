@@ -21,7 +21,7 @@
     <link href="../css/stylish-portfolio.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -256,13 +256,28 @@
                         I contructed this scene based off of my own desk during graphics
                         assignments :)
                     </div>
+                    <div>
+                        Rendered at 1024x512, 512 samples per pixel, with AAA to remove jaggies.
+                    </div>
                     <br/>
-                    <img src="../img/path-final-1.png" width="1024">
+                    <img id="final" src="../img/path-final-aa.png" width="1024">
                     <br />
                     <br/>
-                    <p> The same scene rendered with my old ray tracer: </p>
-                    <img src="../img/ray-final-1.png" width="512">
-
+                    <img id="change1" src="../img/path-final-aa.png" width="128">
+                    <img id="change2" src="../img/path-final-1.png" width="128">
+                    <img id="change3" src="../img/ray-final-1.png" width="128">
+                    <br/>
+                    <div class="container" style="width: 440px">
+                        <div class="col-lg-4">
+                    With AA
+                        </div>
+                        <div class="col-lg-4">
+                    Without AA
+                        </div>
+                        <div class="col-lg-4">
+                     Original RT
+                        </div>
+                    </div>
                     <hr />
 
                     <h1> Bonus Objectives </h1>
@@ -287,8 +302,21 @@
 
                     <h2> Spatial Partitioning with kd-trees </h2>
                     <div>
-                        Each mesh's triangles are split using kd-trees, so that when there is a hit with
-                        the meshes bounding box, only up. This is accomplished by
+                        Each mesh's triangles are split during a preprocessing step using kd-trees,
+                        where at each step the polygons are split on the midpoint of all the polygons
+                        in the mesh with a plane determined by a simple heuristic, continuing until
+                        maximum depth has exceeded or there are too few polygons in one leaf.
+                        When performing intersection, instead of checking through every polygon of the mesh, we can now
+                        instead check for the kd-tree node's left and right bounding boxes,
+                        iterating through both only if the ray intersects both the boxes, which can potentially
+                        reduce mesh intersect from an O(n) operation to an O(logn) operation.
+                        Once at the leaf of the kd tree, perform normal triangle intersect on the small
+                        number of triangles bounded by that leaf's bounding box.
+                    </div>
+                    <br/>
+                    <div>
+                        Here is a the performance of rendering an IcoSphere from blender with varying
+                        amounts of subdivision:
                     </div>
                     <br/>
                     <img src="../img/misc-kd.png" width="512">
@@ -348,10 +376,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script>
@@ -382,6 +410,19 @@
                 }
             }
         });
+    });
+
+    $("#change1").click(function(e) {
+        e.preventDefault();
+        $("#final").attr("src","../img/path-final-aa.png");
+    });
+    $("#change2").click(function(e) {
+        e.preventDefault();
+        $("#final").attr("src","../img/path-final-1.png");
+    });
+    $("#change3").click(function(e) {
+        e.preventDefault();
+        $("#final").attr("src","../img/ray-final-1.png");
     });
     </script>
 
