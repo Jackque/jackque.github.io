@@ -322,16 +322,45 @@
                     <img src="../img/misc-kd.png" width="512">
                     <img src="../img/misc-kd-scene.png" width="256">
 
+                    <hr />
 
-                    <br />
                     <h2> Phong Shading </h2>
+                    <div>
+                        Phong shading creates smooth surfaces from lighting instead of flat ones. This is done
+                        through normal interpolation, given a normal for each vertex of a triangle during intersection.
+                        This also requires meshes that have vertex normals as opposed to face normals, something that is
+                        easily accomplished in Blender.
+                    </div>
+                    <br/>
                     <img src="../img/misc-flat.png" width="512">
                     <img src="../img/misc-smooth.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Microfacet BRDF & Glossy Reflection </h2>
+                    <div>
+                        I  implemented a specular microfacet BRDF through a variation of Cook-Torrance, which aims to
+                        model materials as if they had little microfacets or imperfections at the microscopic level.
+                        The equation looks like this:
+                    </div>
+                    <img src="../img/misc-ct.png" width="200">
+                    <div>
+                        The F term represents how metallic the object is, as in, how it reflects light between different angles.
+                        The D term represents the normal distribution of the microfacets, where the more microfacets
+                        there were the more probability light is scattered. The G term represents the masking/shadowing of
+                        microfacets, where a higher value means more faces are blocked by each other.
+                        The F term is Schlick's approximation of the Fresnel equation, the D and G terms are from Trowbridge-Reitz,
+                        referred commonly as GGX.
+                    </div>
+                    <br/>
+                    <img src="../img/misc-mats.png" width="512">
+                    <br/>
+                    <br/>
+                    <div>
+                        With the BRDF, it becomes easy to tune a few parameters like roughness to create a glossy reflection effect.
+                    </div>
+                    <br/>
                     <img src="../img/misc-glossy.png" width="512">
-                    <p> img here of different materirals...</p>
 
                 </div>
             </div>
