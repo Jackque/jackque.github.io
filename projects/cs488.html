@@ -76,98 +76,224 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-					<h1>CS488 Project: Ray Tracer</h1>
-                    <p>For my CS488 project, I decided to ...</p>
+					<h1 style="font-size:64px">CS488 Project: Battlestation</h1>
+                    <hr/>
+                    <p>
+                        For my CS488 project, I decided to improve on my ray tracer from assignment 4, starting
+                        with the easy objectives, then implementing an approximation of global illumination through
+                        path tracing, then hopefully easily porting over the features to my path tracing implementation.
+                    </p>
 
-                    <br />
+                    <hr />
+
                     <h2>Basic Cornell Box</h2>
+                    <div>
+                        To start off, I made a basic cornell box as a test scene.
+                    </div>
+                    <br/>
                     <img src="../img/ray-00-base.png" width="512">
 
+                    <hr/>
+
                     <h2>Texture Mapping</h2>
+                    <div>
+                        Introduce uv coordinates to meshes and using math to calculate
+                        uv's for primitives.
+                    </div>
+                    <br/>
                     <img src="../img/ray-01-texture.png" width="512">
 
-                    <br />
+                    <hr/>
+
                     <h2> Bump/Normal Mapping</h2>
+                    <div>
+                        Same as texture mapping but also calculate tangents and bitangents with bitangents
+                        going in the positive u direction and bitangents going in the positive v direction.
+                    </div>
+                    <br/>
                     <img src="../img/ray-02-bump.gif" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Reflection</h2>
+                    <div>
+                        Bounce rays off of "reflective" surfaces that are defined by the material reflected
+                        by the angle of incidence to the normal.
+                    </div>
+                    <br/>
                     <img src="../img/ray-03-reflection.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Refraction</h2>
+                    <div>
+                        Use Snell's law to bend rays of light proportional to refractive indexes, and
+                        in the cases where the angle of incidence is greater than the critical angle between the
+                        two mediums, there is total internal reflection.
+                    </div>
+                    <br/>
                     <img src="../img/ray-04-refraction.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Adaptive Anti-Aliasing</h2>
+                    <div>
+                        Utilize edge detection Sobel-Feldman edge detection algorithm, then perform
+                        supersampling on pixels where there is an edge beyond a certain threshold
+                    </div>
+                    <br/>
                     <img src="../img/ray-05-aa-before.png" width="512">
                     <img src="../img/ray-05-aa-edges.png" width="512">
                     <br /><br/>
                     <img src="../img/ray-05-aa-edges-detected.png" width="512">
                     <img src="../img/ray-05-aa-after.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Depth of Field</h2>
+                    <div>
+                        Implement "blur" by introducing an aperture to the render settings to mimic a camera with
+                        a lens rather than a pinhole camera. Instead of using the "eye" all the time, use many points
+                        sampled on the aperture modelled as a unit disk, then send a ray out from that sampled
+                        point to the lookat, the focal point, and average the results.
+                        This means that all objects not lying near the focal plane
+                        will appear blurred since the rays don't converge at different points.
+                    </div>
+                    <br/>
                     <img src="../img/ray-06-dof.png" width="512">
                     <img src="../img/ray-06-dof2.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Soft Shadows</h2>
+                    <div>
+                        Implement area light sources to represent how lights work in real life, then instead of
+                        using one shadow ray per point light instead sample many points on the spherical light's
+                        surface then average out the contributions of the shadow rays created from those points.
+                    </div>
+                    <br/>
                     <img src="../img/ray-07-ss.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2>Animation</h2>
-                    <img src="../img/ray-02-bump.gif" width="512">
+                    <div>
+                        Animate objects within the scene file by introducing keyframes through
+                        matrix transforms, i.e. keyframe n+1 is after transform x. Interpolation
+                        is done linearly and with Bezier curves to get the ease-in ease-out effect.
+                    </div>
+                    <br/>
+                    <img src="../img/ray-08-animation.gif" width="512">
 
-                    <br />
-                    <br/>
-                    <br/>
+                    <hr />
                     <h1> Path Tracing </h1>
-                    <p> blah blah blah </p>
+                    <p>
+                        Path tracing was implemented to better approximate global illumination, creating
+                        effects like soft shadows, color bleeding, and caustics for "free," giving scenes
+                        less of a flat appearance from lighting. This is accomplished by bouncing rays off of surfaces
+                        at each surface interaction in accordance with a Bireflectional distribution function depending
+                        on the material of the object, which averaged over many samples performs Monte Carlo integration
+                        over all possible outcomes and will theoretically converge to Kajiya's "rendering equation."
+                    </p>
+                    <p>
+                        Along with path tracing, I implemented a simple microfacet BRDF for specular light interactions
+                        using a variation of the Cook-Torrance model. I also used a sampler that
+                        is more uniform than a random sampler to reach convergence faster. All of the above
+                        features were also ported to the new path tracer, with some being more difficult than
+                        others.
+                    </p>
+                    <p>
+                        Some things I also included to improve on the path tracer were Russian Roulette termination,
+                        using direct + indirect lighting, and using importance sampling to reduce noise.
+                    </p>
 
-                    <br />
+                    <hr />
+
                     <h2> Base Cornell Box </h2>
+                    <div>
+                        The new cornell box. Notice the color bleeding effects on the sides of the floor,
+                        back wall, ceiling, and the "egg" sphere.
+                    </div>
+                    <br/>
                     <img src="../img/path-00-base.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Texture Mapping & Depth of Field </h2>
+                    <div>
+                        Texture mapping requires no changes. Depth of field required many samples to reach
+                        convergence in the path tracing portion for each aperture sample.
+                    </div>
+                    <br/>
                     <img src="../img/path-01-texture.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Bump Mapping </h2>
+                    <br/>
                     <img src="../img/path-02-bump.gif" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Reflection & Refraction </h2>
+                    <div>
+                        Reflection requires no changes. Refraction now has (weak) caustics from
+                        the light rays going through the refractive medium
+                    </div>
+                    <br/>
                     <img src="../img/path-03-refr.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Animation </h2>
+                    <br/>
                     <img src="../img/path-04-animation.gif" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Final Scene </h2>
-                    <img src="../img/path-final-1.png" width="512">
+                    <div>
+                        I contructed this scene based off of my own desk during graphics
+                        assignments :)
+                    </div>
+                    <br/>
+                    <img src="../img/path-final-1.png" width="1024">
                     <br />
                     <br/>
                     <p> The same scene rendered with my old ray tracer: </p>
                     <img src="../img/ray-final-1.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h1> Bonus Objectives </h1>
+                    <p>
+                        I implemented a few bonus objectives to speed up rendering times and
+                        to overall improve the asthetic of the renders.
+                    </p>
+
+                    <hr />
+
                     <h2> Multithreading </h2>
                     <p>
-                        I implemented multithreading since ray tracing is a highly parallelizable task using C++11 threads.
+                        I implemented multithreading since ray tracing is a highly parallelizable task, using C++11 threads.
                     </p>
                     <p>
-                        Here is a graph of #threads vs performance for rendering macho cows
+                        Here is a graph of log2(threads) vs performance for rendering macho cows
                         at high resolution on a 4 core Macbook Pro:
                     </p>
                     <img src="../img/misc-multithread.png" width="512">
 
-                    <br />
+                    <hr />
+
                     <h2> Spatial Partitioning with kd-trees </h2>
-                    <img src="../img/" width="512">
+                    <div>
+                        Each mesh's triangles are split using kd-trees, so that when there is a hit with
+                        the meshes bounding box, only up. This is accomplished by
+                    </div>
+                    <br/>
+                    <img src="../img/misc-kd.png" width="512">
+                    <img src="../img/misc-kd-scene.png" width="256">
+
 
                     <br />
                     <h2> Phong Shading </h2>
